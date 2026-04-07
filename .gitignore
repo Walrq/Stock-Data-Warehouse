@@ -1,0 +1,69 @@
+# ============================================================
+# SENSITIVE DATA — NEVER COMMIT THESE
+# ============================================================
+
+# Environment variables (passwords, API keys, secrets)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# ============================================================
+# NODE / NPM
+# ============================================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# ============================================================
+# BUILD OUTPUTS
+# ============================================================
+
+dist/
+dist-ssr/
+build/
+*.local
+
+# ============================================================
+# OS FILES
+# ============================================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# EDITOR & IDE
+# ============================================================
+
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ============================================================
+# MISC / SECURITY
+# ============================================================
+
+# Private keys / certificates
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Database dumps (may contain real data)
+*.sql.bak
+*.dump
+
+# Test response snapshots that may have real data
+test_resp.json
