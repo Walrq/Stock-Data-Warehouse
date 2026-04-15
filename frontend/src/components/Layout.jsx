@@ -19,7 +19,7 @@ const Layout = () => {
                 <div className="p-2 bg-primary/20 rounded-lg text-primary">
                     <TrendingUp className="w-6 h-6" />
                 </div>
-                <h1 className="text-xl font-bold tracking-tight text-white">Stock DWH</h1>
+                <h1 className="text-xl font-bold tracking-tight text-white">Big Bull</h1>
             </div>
             
             <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -42,8 +42,6 @@ const Layout = () => {
             </nav>
             
             <div className="p-4 border-t border-dark-bor text-sm text-dark-muted flex flex-col gap-1 items-center mb-4">
-                <span>DBMS Project</span>
-                <span>© 2026 Admin</span>
             </div>
         </aside>
 
