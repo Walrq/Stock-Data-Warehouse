@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { companyApi } from '../services/api';
 import MetricCard from '../components/MetricCard';
-import { Users, TrendingUp, Activity, Briefcase } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 
 const Dashboard = () => {
     const [companies, setCompanies] = useState([]);
@@ -29,65 +29,74 @@ const Dashboard = () => {
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-white tracking-tight">Dashboard Overview</h1>
-                <button 
-                  onClick={() => navigate('/add-company')}
-                  className="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-xl font-medium transition-colors cursor-pointer"
+                <div>
+                    <h1 className="text-2xl font-bold text-foreground tracking-tight">Dashboard Overview</h1>
+                    <p className="text-sm text-muted-foreground mt-1">Monitor your tracked companies and market activity.</p>
+                </div>
+                <button
+                    onClick={() => navigate('/add-company')}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer text-sm"
                 >
                     + New Company
                 </button>
             </div>
 
-            {/* Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {/* Metrics — only Total Companies */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <MetricCard title="Total Companies" value={companies.length} icon={Briefcase} />
-                <MetricCard title="Active Trades" value="24,593" icon={Activity} />
-                <MetricCard title="Daily Volume" value="1.2M" icon={Users} trend={{ isPositive: true, value: 12.5 }} />
-                <MetricCard title="Avg Portfolio Growth" value="+4.2%" icon={TrendingUp} trend={{ isPositive: true, value: 4.2 }} />
             </div>
 
             {/* Companies List */}
-            <div className="bg-dark-card border border-dark-bor rounded-2xl overflow-hidden shadow-sm">
-                <div className="p-6 border-b border-dark-bor">
-                    <h2 className="text-lg font-bold text-white">Tracked Companies</h2>
-                    <p className="text-sm text-dark-muted mt-1">Select a company to view historical stock prices and insights.</p>
+            <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-border">
+                    <h2 className="text-base font-semibold text-foreground">Tracked Companies</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Select a company to view historical stock prices and insights.</p>
                 </div>
-                
+
                 {loading ? (
-                    <div className="p-8 text-center text-dark-muted">Loading companies...</div>
+                    <div className="p-8 text-center text-muted-foreground">Loading companies...</div>
                 ) : error ? (
-                    <div className="p-8 text-center text-danger">{error}</div>
+                    <div className="p-8 text-center text-destructive">{error}</div>
                 ) : companies.length === 0 ? (
-                    <div className="p-8 text-center text-dark-muted">No companies found. Click "New Company" to add one.</div>
+                    <div className="p-8 text-center text-muted-foreground">No companies found. Click "+ New Company" to add one.</div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-dark-bg text-dark-muted text-xs uppercase tracking-wider">
+                            <thead className="bg-muted/50 text-muted-foreground text-xs uppercase tracking-wider">
                                 <tr>
                                     <th className="px-6 py-4 font-medium">Company Name</th>
                                     <th className="px-6 py-4 font-medium">Symbol</th>
-                                    <th className="px-6 py-4 font-medium">Sector</th>
-                                    <th className="px-6 py-4 font-medium">Industry</th>
+                                    <th className="px-6 py-4 font-medium">Price</th>
+                                    <th className="px-6 py-4 font-medium">1D %</th>
                                     <th className="px-6 py-4 font-medium text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-dark-bor">
+                            <tbody className="divide-y divide-border">
                                 {companies.map((co) => (
-                                    <tr key={co.company_id} className="hover:bg-dark-bg/50 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-white">{co.company_name}</td>
+                                    <tr key={co.company_id} className="hover:bg-muted/30 transition-colors">
+                                        <td className="px-6 py-4 font-medium text-foreground">{co.company_name}</td>
                                         <td className="px-6 py-4">
-                                            <span className="px-2 py-1 bg-primary/20 text-primary text-xs font-bold rounded-lg border border-primary/20">
+                                            <span className="px-2 py-1 bg-primary/15 text-primary text-xs font-bold rounded-md border border-primary/20">
                                                 {co.ticker}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-dark-muted">{co.sector || '-'}</td>
-                                        <td className="px-6 py-4 text-dark-muted">{co.industry || '-'}</td>
+                                        <td className="px-6 py-4 font-medium text-foreground">
+                                            {co.latest_close != null ? `₹${Number(co.latest_close).toFixed(2)}` : <span className="text-muted-foreground">—</span>}
+                                        </td>
+                                        <td className="px-6 py-4 font-medium">
+                                            {co.change_1d_pct != null
+                                                ? <span className={Number(co.change_1d_pct) >= 0 ? 'text-green-500' : 'text-destructive'}>
+                                                    {Number(co.change_1d_pct) >= 0 ? '+' : ''}{Number(co.change_1d_pct).toFixed(2)}%
+                                                  </span>
+                                                : <span className="text-muted-foreground">—</span>
+                                            }
+                                        </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button 
+                                            <button
                                                 onClick={() => navigate(`/company/${co.ticker}`)}
-                                                className="text-primary hover:text-white transition-colors cursor-pointer text-sm font-medium"
+                                                className="text-primary hover:text-primary/80 transition-colors cursor-pointer text-sm font-medium"
                                             >
-                                                View Details &rarr;
+                                                View Details →
                                             </button>
                                         </td>
                                     </tr>

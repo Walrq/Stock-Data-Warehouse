@@ -7,6 +7,7 @@ import AddCompany from './pages/AddCompany';
 import TradeData from './pages/TradeData';
 import Research from './pages/Research';
 import Screener from './pages/Screener'; // [SCREENER FEATURE]
+import Analytics from './pages/Analytics';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="trades" element={<TradeData />} />
           <Route path="research" element={<Research />} />
           <Route path="screener" element={<Screener />} /> {/* [SCREENER FEATURE] */}
+          <Route path="analytics" element={<Analytics />} />
         </Route>
       </Routes>
     </BrowserRouter>

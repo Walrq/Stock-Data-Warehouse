@@ -9,21 +9,22 @@ const TradeData = () => {
     // Filters
     const [limit, setLimit] = useState(50);
 
-    const fetchTrades = async () => {
-        setLoading(true);
-        try {
-            const res = await tradeApi.getHistory({ limit });
-            setTrades(res.data.data);
-            setLoading(false);
-        } catch (err) {
-            console.error(err);
-            setError('Failed to fetch trade data.');
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        fetchTrades();
+        let isMounted = true;
+        const load = async () => {
+            if (isMounted) setLoading(true);
+            try {
+                const res = await tradeApi.getHistory({ limit });
+                if (isMounted) setTrades(res.data.data);
+            } catch (err) {
+                console.error(err);
+                if (isMounted) setError('Failed to fetch trade data.');
+            } finally {
+                if (isMounted) setLoading(false);
+            }
+        };
+        load();
+        return () => { isMounted = false; };
     }, [limit]);
 
     return (
