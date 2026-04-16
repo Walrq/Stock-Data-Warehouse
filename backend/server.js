@@ -13,6 +13,7 @@ const tradeRoutes = require('./routes/tradeRoutes');
 const indicatorRoutes = require('./routes/indicatorRoutes');
 const externalRoutes = require('./routes/externalRoutes');
 const screenerRoutes = require('./routes/screenerRoutes'); // [SCREENER FEATURE]
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 const app = express();
 
@@ -27,7 +28,8 @@ app.use('/api/stocks', stockRoutes);
 app.use('/api/trades', tradeRoutes);
 app.use('/api/indicators', indicatorRoutes);
 app.use('/api/external', externalRoutes);
-app.use('/api/screener', screenerRoutes); // [SCREENER FEATURE]
+app.use('/api/screener',  screenerRoutes);  // [SCREENER FEATURE]
+app.use('/api/analytics', analyticsRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

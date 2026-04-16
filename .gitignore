@@ -51,19 +51,49 @@ desktop.ini
 *.sw?
 
 # ============================================================
-# MISC / SECURITY
+# SECURITY — PRIVATE KEYS / CERTS
 # ============================================================
 
-# Private keys / certificates
 *.pem
 *.key
 *.crt
 *.p12
 *.pfx
 
-# Database dumps (may contain real data)
+# ============================================================
+# DATABASE
+# ============================================================
+
+# Backup dumps (may contain real user data)
 *.sql.bak
 *.dump
+*.sql.gz
 
-# Test response snapshots that may have real data
-test_resp.json
+# ============================================================
+# SCRATCH / TEST / TEMP FILES
+# ============================================================
+
+# One-off test scripts and snapshots (not part of the app)
+test*.js
+test*.json
+testApi.js
+temp*.json
+temp*.js
+*_temp.*
+*_output.json
+*.temp
+*.tmp
+
+# ============================================================
+# FRONTEND — DEFAULT VITE ASSETS (unused)
+# ============================================================
+
+frontend/src/assets/react.svg
+frontend/src/assets/vite.svg
+
+# ============================================================
+# MISC
+# ============================================================
+
+# Antigravity / AI assistant working files
+.antigravityignore

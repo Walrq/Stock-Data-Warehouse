@@ -32,6 +32,11 @@ const AddCompany = () => {
             await externalApi.fetchNews({
                 company_id: newCompany.company_id
             });
+            // 3. Track and Cache Rich Profile Data
+            await externalApi.fetchProfile({
+                name: newCompany.ticker,
+                company_id: newCompany.company_id
+            });
 
             setStatus({ loading: false, error: null, success: true });
             
