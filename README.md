@@ -1,6 +1,6 @@
 # 📈 Stock Data Warehouse — "Big Bull"
 
-> A full-stack **stock market intelligence platform** for Indian equities — built with Node.js, MySQL, and React.
+> A full-stack **stock market intelligence platform** for Indian equities — built with Node.js, MySQL and React.
 
 ---
 
@@ -171,6 +171,7 @@ Add any NSE/BSE-listed stock by ticker. One form submission triggers:
 4. News fetch (→ `market_news` table)
 
 ---
+
 
 ## 🔄 Data Flow
 
