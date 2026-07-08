@@ -163,7 +163,7 @@ const CompanyDetail = () => {
                                 </span>
                             </div>
                             <div className="flex gap-4 text-sm text-muted-foreground font-medium mt-1">
-                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-success"></span> {company.sector || externalData?.sector || 'N/A Sector'}</span>
+                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500"></span> {company.sector || externalData?.sector || 'N/A Sector'}</span>
                                 <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-primary"></span> {company.industry || externalData?.industry || 'N/A Industry'}</span>
                             </div>
                         </div>
@@ -174,7 +174,7 @@ const CompanyDetail = () => {
                             <h2 className="text-3xl font-bold text-foreground">
                                 ₹{stockData.length > 0 ? Number(stockData[stockData.length - 1].close_price).toFixed(2) : (externalData?.currentPrice?.NSE || externalData?.currentPrice?.BSE || '0.00')}
                             </h2>
-                            <p className="text-xs text-success font-medium mt-1">Live from Market</p>
+                            <p className="text-xs text-green-500 font-medium mt-1">Live from Market</p>
                         </div>
                     </div>
 

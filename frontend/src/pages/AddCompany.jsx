@@ -12,7 +12,7 @@ const AddCompany = () => {
     const [status, setStatus] = useState({ loading: false, error: null, success: false });
 
     const handleChange = (e) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value.toUpperCase() && e.target.name === 'ticker' ? e.target.value.toUpperCase() : e.target.value }));
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.name === 'ticker' ? e.target.value.toUpperCase() : e.target.value }));
     };
 
     const handleSubmit = async (e) => {
@@ -54,19 +54,19 @@ const AddCompany = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-white tracking-tight">Add New Company</h1>
-                <p className="text-dark-muted mt-2">Track a new stock ticker in the data warehouse. Historical data will be automatically fetched upon creation.</p>
+                <h1 className="text-3xl font-bold text-foreground tracking-tight">Add New Company</h1>
+                <p className="text-muted-foreground mt-2">Track a new stock ticker in the data warehouse. Historical data will be automatically fetched upon creation.</p>
             </div>
 
-            <div className="bg-dark-card border border-dark-bor rounded-2xl p-8">
+            <div className="bg-card border border-border rounded-2xl p-8">
                 {status.success && (
-                    <div className="mb-6 p-4 bg-success/10 border border-success/20 text-success rounded-xl font-medium">
+                    <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 text-green-500 rounded-xl font-medium">
                         Successfully added company and retrieved historical data! Redirecting...
                     </div>
                 )}
                 
                 {status.error && (
-                    <div className="mb-6 p-4 bg-danger/10 border border-danger/20 text-danger rounded-xl font-medium">
+                    <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 text-destructive rounded-xl font-medium">
                         Error: {status.error}
                     </div>
                 )}
@@ -74,42 +74,42 @@ const AddCompany = () => {
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-dark-muted">Company Name *</label>
+                            <label className="text-sm font-medium text-muted-foreground">Company Name *</label>
                             <input 
                                 required
                                 name="company_name"
                                 value={formData.company_name}
                                 onChange={handleChange}
                                 placeholder="Reliance Industries Limited"
-                                className="w-full bg-dark-bg border border-dark-bor rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                className="w-full bg-background border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             />
                         </div>
                         
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-dark-muted">Ticker Symbol *</label>
+                            <label className="text-sm font-medium text-muted-foreground">Ticker Symbol *</label>
                             <input 
                                 required
                                 name="ticker"
                                 value={formData.ticker}
                                 onChange={handleChange}
                                 placeholder="RELIANCE"
-                                className="w-full bg-dark-bg border border-dark-bor rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                className="w-full bg-background border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             />
                         </div>
                     </div>
 
-                    <div className="pt-4 border-t border-dark-bor flex justify-end gap-3 mt-8">
+                    <div className="pt-4 border-t border-border flex justify-end gap-3 mt-8">
                         <button 
                             type="button"
                             onClick={() => navigate(-1)}
-                            className="px-6 py-3 rounded-xl font-medium border border-dark-bor text-white hover:bg-dark-bg transition-colors"
+                            className="px-6 py-3 rounded-xl font-medium border border-border text-foreground hover:bg-background transition-colors"
                         >
                             Cancel
                         </button>
                         <button 
                             type="submit"
                             disabled={status.loading}
-                            className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-xl font-medium transition-colors border border-primary disabled:opacity-50"
+                            className="bg-primary hover:bg-primary/90 text-foreground px-8 py-3 rounded-xl font-medium transition-colors border border-primary disabled:opacity-50"
                         >
                             {status.loading ? 'Adding...' : 'Add Company & Fetch Data'}
                         </button>

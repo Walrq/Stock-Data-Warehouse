@@ -31,6 +31,7 @@ CREATE TABLE companies (
     exchange_id INT,
     ipo_date DATE,
     market_cap BIGINT,
+    profile_data JSON,
     FOREIGN KEY (exchange_id) REFERENCES exchanges(exchange_id)
 ) ENGINE=InnoDB;
 
