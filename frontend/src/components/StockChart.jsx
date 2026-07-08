@@ -22,10 +22,10 @@ const StockChart = ({ data }) => {
   }));
 
   return (
-    <div className="h-[400px] w-full bg-dark-card p-4 rounded-xl border border-dark-bor">
-      <h3 className="text-white font-bold mb-4">Price History</h3>
+    <div className="h-[400px] w-full bg-card p-4 rounded-xl border border-border">
+      <h3 className="text-foreground font-bold mb-4">Price History</h3>
       {formattedData.length === 0 ? (
-        <div className="h-full flex items-center justify-center text-dark-muted">No data available</div>
+        <div className="h-full flex items-center justify-center text-muted-foreground">No data available</div>
       ) : (
         <ResponsiveContainer width="100%" height="85%">
           <LineChart data={formattedData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>

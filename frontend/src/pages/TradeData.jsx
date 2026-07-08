@@ -31,14 +31,14 @@ const TradeData = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-white tracking-tight">Trade History</h1>
-                    <p className="text-sm text-dark-muted mt-1">Real-time log of market transactions across all tracked symbols.</p>
+                    <h1 className="text-2xl font-bold text-foreground tracking-tight">Trade History</h1>
+                    <p className="text-sm text-muted-foreground mt-1">Real-time log of market transactions across all tracked symbols.</p>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                    <span className="text-sm text-dark-muted font-medium">Show:</span>
+                    <span className="text-sm text-muted-foreground font-medium">Show:</span>
                     <select 
-                        className="bg-dark-card border border-dark-bor rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary text-sm"
+                        className="bg-card border border-border rounded-xl px-4 py-2 text-foreground focus:outline-none focus:border-primary text-sm"
                         value={limit}
                         onChange={(e) => setLimit(e.target.value)}
                     >
@@ -49,15 +49,15 @@ const TradeData = () => {
                 </div>
             </div>
 
-            <div className="bg-dark-card border border-dark-bor rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
                 {loading ? (
-                    <div className="p-12 text-center text-dark-muted">Loading trades...</div>
+                    <div className="p-12 text-center text-muted-foreground">Loading trades...</div>
                 ) : error ? (
-                    <div className="p-8 text-center text-danger">{error}</div>
+                    <div className="p-8 text-center text-destructive">{error}</div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-dark-bg text-dark-muted text-xs uppercase tracking-wider">
+                            <thead className="bg-background text-muted-foreground text-xs uppercase tracking-wider">
                                 <tr>
                                     <th className="px-6 py-4 font-medium">Transaction ID</th>
                                     <th className="px-6 py-4 font-medium">Timestamp</th>
@@ -67,27 +67,27 @@ const TradeData = () => {
                                     <th className="px-6 py-4 font-medium text-right">Total Value</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-dark-bor">
+                            <tbody className="divide-y divide-border">
                                 {trades.map((trade) => {
                                     const totalValue = Number(trade.price) * Number(trade.quantity);
                                     return (
-                                        <tr key={trade.id} className="hover:bg-dark-bg/50 transition-colors">
-                                            <td className="px-6 py-4 font-mono text-xs text-dark-muted">TXN-{String(trade.id).padStart(6, '0')}</td>
-                                            <td className="px-6 py-4 text-sm text-dark-muted">
+                                        <tr key={trade.trade_id} className="hover:bg-background/50 transition-colors">
+                                            <td className="px-6 py-4 font-mono text-xs text-muted-foreground">TXN-{String(trade.trade_id).padStart(6, '0')}</td>
+                                            <td className="px-6 py-4 text-sm text-muted-foreground">
                                                 {new Date(trade.timestamp).toLocaleString()}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className="font-bold text-primary">{trade.symbol}</span>
+                                                <span className="font-bold text-primary">{trade.ticker}</span>
                                             </td>
-                                            <td className="px-6 py-4 text-sm font-medium text-white">₹{Number(trade.price).toFixed(2)}</td>
-                                            <td className="px-6 py-4 text-right text-sm text-dark-muted">{trade.quantity.toLocaleString()}</td>
-                                            <td className="px-6 py-4 text-right text-sm font-bold text-success">₹{totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                            <td className="px-6 py-4 text-sm font-medium text-foreground">₹{Number(trade.price).toFixed(2)}</td>
+                                            <td className="px-6 py-4 text-right text-sm text-muted-foreground">{trade.quantity.toLocaleString()}</td>
+                                            <td className="px-6 py-4 text-right text-sm font-bold text-green-500">₹{totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                                         </tr>
                                     );
                                 })}
                                 {trades.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" className="px-6 py-8 text-center text-dark-muted">
+                                        <td colSpan="6" className="px-6 py-8 text-center text-muted-foreground">
                                             No recent transactions logged in the database.
                                         </td>
                                     </tr>

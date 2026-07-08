@@ -125,7 +125,7 @@ const Screener = () => {
     const handleUpdatePrice = async (row) => {
         if (window.confirm("Are you sure, You are about to use api tokens")) {
             try {
-                await externalApi.fetchHistorical({ name: row.company_name, company_id: row.company_id });
+                await externalApi.fetchHistorical({ name: row.ticker, company_id: row.company_id });
                 runScreener();
             } catch (err) {
                 console.error(err);
